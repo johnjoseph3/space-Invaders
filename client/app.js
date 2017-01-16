@@ -1,2 +1,4 @@
-console.log('hello world');
+/*jshint esversion: 6 */
+
 require("./styles.less");
+require("./game.js");
