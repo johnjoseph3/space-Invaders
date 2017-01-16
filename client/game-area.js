@@ -1,0 +1,27 @@
+const gameArea = {
+	canvas: document.createElement('canvas'),
+	init: function() {
+		this.canvas.width = 300;
+		this.canvas.height = 400;
+		this.context = this.canvas.getContext('2d');
+		document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+	},
+	clear: function() {
+		this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+	},
+	updateGameArea: function (userShip) {
+		gameArea.clear();
+		if (gameArea.key) {
+			if (gameArea.key == 37) {userShip.speedX = -2; userShip.direction = "left";}
+			if (gameArea.key == 39) {userShip.speedX = 2; userShip.direction = "right";}
+			userShip.stopIfAtEdgeOfCanvas();
+		}
+		else {
+			userShip.stopMove();
+		}
+		userShip.newPosition();
+		userShip.update();
+	}
+};
+
+export {gameArea};
