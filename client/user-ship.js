@@ -33,6 +33,14 @@ function UserShip (width, height, color, x, y, gameArea) {
 	this.fireBullet = function() {
 		this.bullets.push(new Bullet(this, gameArea));
 	};
+	this.destroyIfHitByBullet = function(badGuyBullets) {
+		let self = this;
+		badGuyBullets.forEach(function(bullet, index){
+			if((bullet.x >= self.x) && (bullet.x <= self.x + width) && (bullet.y === self.y)) {
+				alert('Game Over');
+			}
+		});
+	};
 }
 
 export {UserShip};
