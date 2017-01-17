@@ -42,6 +42,7 @@ function BadGuy (width, height, color, x, y, gameArea) {
 				self.height = 0;
 				self.width = 0;
 				self.hasBeenHit = true;
+				userShipBullets.splice(index, 1);
 			}
 		});
 	};
