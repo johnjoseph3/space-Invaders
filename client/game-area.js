@@ -17,6 +17,7 @@ const gameArea = {
 		updateBullets(userShip);
 		moveBadGuy(badGuy);
 		updateBullets(badGuy);
+		badGuy.destroyIfHitByBullet(userShip.bullets);
 	}
 };
 

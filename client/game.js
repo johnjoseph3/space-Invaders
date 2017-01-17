@@ -22,6 +22,10 @@ const userShip = new UserShip(30, 30, "red",
 );
 const badGuy = new BadGuy(30, 30, "red", 0, 0, gameArea);
 
-setInterval(function() { badGuy.fireBullet(); }, 2000);
+setInterval(function() {
+	if(!badGuy.hasBeenHit) {
+		badGuy.fireBullet();
+	}
+}, 2000);
 
 setInterval(function() { gameArea.updateGameArea(userShip, badGuy); }, 20);
