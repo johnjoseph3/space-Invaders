@@ -15,7 +15,7 @@ window.addEventListener('keyup', function (e) {
 });
 
 gameArea.init();
-const userShip = new UserShip(30, 30, "red",
+const userShip = new UserShip(30, 30, "blue",
 	gameArea.canvas.width/2 - 15,
 	gameArea.canvas.height - 30,
 	gameArea
