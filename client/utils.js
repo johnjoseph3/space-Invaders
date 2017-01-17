@@ -22,15 +22,21 @@ function removeBullet (userShip, index) {
 	userShip.bullets.splice(index, 1);
 }
 
-function updateBullets (userShip) {
-	if (userShip.bullets.length){
-		userShip.bullets.forEach(function(bullet, index){
+function updateBullets (ship) {
+	if (ship.bullets.length){
+		ship.bullets.forEach(function(bullet, index){
 			moveBullet(bullet);
 			if(bullet.y < 1) {
-				removeBullet(userShip, index);
+				removeBullet(ship, index);
 			}
 		});
 	}
 }
 
-export {moveUserShip, updateBullets};
+function moveBadGuy (badGuy) {
+	badGuy.changeDirectionsIfAtEdgeOfCanvas();
+	badGuy.newPosition();
+	badGuy.update();
+}
+
+export {moveUserShip, updateBullets, moveBadGuy};

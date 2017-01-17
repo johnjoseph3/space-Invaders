@@ -1,4 +1,4 @@
-import {moveUserShip, updateBullets} from './utils.js';
+import {moveUserShip, updateBullets, moveBadGuy} from './utils.js';
 
 const gameArea = {
 	canvas: document.createElement('canvas'),
@@ -11,10 +11,12 @@ const gameArea = {
 	clear: function() {
 		this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 	},
-	updateGameArea: function (userShip) {
+	updateGameArea: function (userShip, badGuy) {
 		gameArea.clear();
 		moveUserShip(userShip);
 		updateBullets(userShip);
+		moveBadGuy(badGuy);
+		updateBullets(badGuy);
 	}
 };
 
