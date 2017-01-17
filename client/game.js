@@ -5,6 +5,9 @@ import {gameArea} from './game-area.js';
 
 window.addEventListener('keydown', function (e) {
 	gameArea.key = e.keyCode;
+	if(e.keyCode === 32) {
+		userShip.fireBullet();
+	}
 });
 window.addEventListener('keyup', function (e) {
 	gameArea.key = false;

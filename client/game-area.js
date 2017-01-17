@@ -1,3 +1,5 @@
+import {moveUserShip, updateBullets} from './utils.js';
+
 const gameArea = {
 	canvas: document.createElement('canvas'),
 	init: function() {
@@ -11,16 +13,8 @@ const gameArea = {
 	},
 	updateGameArea: function (userShip) {
 		gameArea.clear();
-		if (gameArea.key) {
-			if (gameArea.key == 37) {userShip.speedX = -2; userShip.direction = "left";}
-			if (gameArea.key == 39) {userShip.speedX = 2; userShip.direction = "right";}
-			userShip.stopIfAtEdgeOfCanvas();
-		}
-		else {
-			userShip.stopMove();
-		}
-		userShip.newPosition();
-		userShip.update();
+		moveUserShip(userShip);
+		updateBullets(userShip);
 	}
 };
 
