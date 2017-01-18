@@ -12,6 +12,11 @@ module.exports = {
 		path: "dist",
 		filename: 'app.bundle.js'
 	},
+	resolve: {
+		alias: {
+			jquery: "jquery/src/jquery"
+		}
+	},
 	module: {
 		preLoaders: [{test: /\.js$/, exclude: /node_modules/, loader: 'jshint-loader'}],
 		loaders: [

@@ -3,29 +3,59 @@
 import {UserShip} from './user-ship.js';
 import {BadGuy} from './bad-guy.js';
 import {gameArea} from './game-area.js';
+import $ from 'jquery';
+let userShip;
+let badGuy;
+let gameIsRunning = false;
+let enemyFireInterval;
+let gameUpdateInterval;
 
-window.addEventListener('keydown', function (e) {
+$(document).on('keydown', function (e) {
+	e.preventDefault();
 	gameArea.key = e.keyCode;
 	if(e.keyCode === 32) {
 		userShip.fireBullet();
 	}
 });
-window.addEventListener('keyup', function (e) {
+$(document).on('keyup', function (e) {
+	e.preventDefault();
 	gameArea.key = false;
 });
+const $playPauseButton = $('.play-pause');
 
-gameArea.init();
-const userShip = new UserShip(30, 30, "blue",
-	gameArea.canvas.width/2 - 15,
-	gameArea.canvas.height - 30,
-	gameArea
-);
-const badGuy = new BadGuy(30, 30, "red", 0, 0, gameArea);
-
-setInterval(function() {
-	if(!badGuy.hasBeenHit) {
-		badGuy.fireBullet();
+$playPauseButton.on('click', function (e) {
+	if(gameIsRunning) {
+		pauseGame();
+		$(this).text('Play');
+	} else {
+		startGame();
+		$(this).text('Pause');
 	}
-}, 2000);
+	gameIsRunning =! gameIsRunning;
+});
 
-setInterval(function() { gameArea.updateGameArea(userShip, badGuy); }, 20);
+function drawGameArea() {
+	gameArea.init();
+	userShip = new UserShip(30, 30, "blue",
+		gameArea.canvas.width/2 - 15,
+		gameArea.canvas.height - 30,
+		gameArea
+	);
+	badGuy = new BadGuy(30, 30, "red", 0, 0, gameArea);
+}
+
+function startGame() {
+	enemyFireInterval = setInterval(function() {
+		if(!badGuy.hasBeenHit) {
+			badGuy.fireBullet();
+		}
+	}, 2000);
+	gameUpdateInterval = setInterval(function() { gameArea.updateGameArea(userShip, badGuy); }, 20);
+}
+
+function pauseGame() {
+	clearInterval(enemyFireInterval);
+	clearInterval(gameUpdateInterval);
+}
+
+drawGameArea();
