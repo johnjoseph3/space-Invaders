@@ -36,8 +36,9 @@ function UserShip (width, height, color, x, y, gameArea) {
 	this.destroyIfHitByBullet = function(badGuyBullets) {
 		let self = this;
 		badGuyBullets.forEach(function(bullet, index){
-			if((bullet.x >= self.x) && (bullet.x <= self.x + width) && (bullet.y === self.y)) {
-				alert('Game Over');
+			if((bullet.x >= self.x) && (bullet.x <= self.x + width) && (bullet.y <= gameArea.canvas.height) && (bullet.y >= (gameArea.canvas.height - self.height))) {
+				console.log('User ship got hit');
+				badGuyBullets.splice(index, 1);
 			}
 		});
 	};
