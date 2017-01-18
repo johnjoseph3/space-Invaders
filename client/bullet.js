@@ -20,7 +20,7 @@ function Bullet (ship, gameArea) {
 	ctx.fillRect(this.x, this.y, this.width, this.height);
 	this.newPosition = function() {
 		if(ship.type === 'user-ship') {
-			this.y -= 1;
+			this.y -= 3;
 		} else {
 			this.y += 1;
 		}

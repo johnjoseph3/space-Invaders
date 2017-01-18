@@ -37,7 +37,7 @@ function BadGuy (width, height, color, x, y, gameArea) {
 	this.destroyIfHitByBullet = function(userShipBullets) {
 		let self = this;
 		userShipBullets.forEach(function(bullet, index){
-			if((bullet.x >= self.x) && (bullet.x <= self.x + width) && (bullet.y === self.y + self.height)) {
+			if((bullet.x >= self.x) && (bullet.x <= self.x + width) && (bullet.y <= (self.y + self.height)) && (bullet.y >= self.y)) {
 				self.speedX = 0;
 				self.height = 0;
 				self.width = 0;
