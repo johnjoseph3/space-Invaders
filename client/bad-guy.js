@@ -1,4 +1,5 @@
 import {Bullet} from './bullet.js';
+let direction = 1;
 
 function BadGuy (width, height, color, x, y, gameArea) {
 	this.width = width;
@@ -22,13 +23,14 @@ function BadGuy (width, height, color, x, y, gameArea) {
 	this.stopMove = function() {
 		this.speedX = 0;
 	};
-	this.changeDirectionsIfAtEdgeOfCanvas = function() {
-		if (this.x < 1) {
-			this.speedX = 1;
+	this.changeDirectionsIfAtEdgeOfCanvas = function(badGuysLength, index) {
+		if(index === 0 && this.x < 1) {
+			direction = 1;
 		}
-		if (this.x + this.width >= gameArea.canvas.width) {
-			this.speedX = -1;
+		if ((index+ 1 === badGuysLength) && (this.x + this.width >= gameArea.canvas.width)) {
+			direction = -1;
 		}
+		this.speedX = direction;
 	};
 	this.bullets = [];
 	this.fireBullet = function() {

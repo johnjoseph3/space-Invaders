@@ -1,14 +1,12 @@
 /*jshint esversion: 6 */
 
 import {UserShip} from './user-ship.js';
-import {BadGuy} from './bad-guy.js';
 import {gameArea} from './game-area.js';
+import {generateBadGuys} from './generate-bad-guys.js';
 import $ from 'jquery';
-let userShip;
-let badGuy;
+let userShip, badGuys, gameUpdateInterval;
+const badGuyFireIntervals = [];
 let gameIsRunning = false;
-let enemyFireInterval;
-let gameUpdateInterval;
 
 $(document).on('keydown', function (e) {
 	e.preventDefault();
@@ -35,26 +33,37 @@ $playPauseButton.on('click', function (e) {
 });
 
 function drawGameArea() {
-	gameArea.init();
+	gameArea.init(300, 400);
 	userShip = new UserShip(30, 30, "blue",
 		gameArea.canvas.width/2 - 15,
 		gameArea.canvas.height - 30,
 		gameArea
 	);
-	badGuy = new BadGuy(30, 30, "red", 0, 0, gameArea);
+	badGuys = generateBadGuys(gameArea);
 }
 
-function startGame() {
-	enemyFireInterval = setInterval(function() {
+function setEnemyFireInterval(badGuy, fireInterval) {
+	let enemyFireInterval = setInterval(function() {
 		if(!badGuy.hasBeenHit) {
 			badGuy.fireBullet();
 		}
-	}, 2000);
-	gameUpdateInterval = setInterval(function() { gameArea.updateGameArea(userShip, badGuy); }, 20);
+	}, fireInterval);
+	badGuyFireIntervals.push(enemyFireInterval);
+}
+
+function startGame() {
+
+	for(let badGuy of badGuys) {
+		let fireInterval = (Math.floor(Math.random() * 10) + 1) * 1000;
+		setEnemyFireInterval(badGuy, fireInterval);
+	}
+	gameUpdateInterval = setInterval(function() { gameArea.updateGameArea(userShip, badGuys); }, 20);
 }
 
 function pauseGame() {
-	clearInterval(enemyFireInterval);
+	for(let enemyFireInterval of badGuyFireIntervals) {
+		clearInterval(enemyFireInterval);
+	}
 	clearInterval(gameUpdateInterval);
 }
 

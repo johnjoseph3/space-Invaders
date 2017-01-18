@@ -33,10 +33,12 @@ function updateBullets (ship) {
 	}
 }
 
-function moveBadGuy (badGuy) {
-	badGuy.changeDirectionsIfAtEdgeOfCanvas();
-	badGuy.newPosition();
-	badGuy.update();
+function moveBadGuys (badGuys) {
+	badGuys.forEach(function(badGuy, index) {
+		badGuy.changeDirectionsIfAtEdgeOfCanvas(badGuys.length, index);
+		badGuy.newPosition();
+		badGuy.update();
+	});
 }
 
-export {moveUserShip, updateBullets, moveBadGuy};
+export {moveUserShip, updateBullets, moveBadGuys};
