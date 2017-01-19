@@ -13,7 +13,6 @@ function BadGuy (width, height, color, x, y, gameArea) {
 	let ctx = gameArea.context;
 	ctx.fillStyle = color;
 	ctx.fillRect(this.x, this.y, this.width, this.height);
-	this.hasBeenHit = false;
 	this.newPosition = function() {
 		this.x += this.speedX;
 	};
@@ -42,10 +41,9 @@ function BadGuy (width, height, color, x, y, gameArea) {
 		let self = this;
 		userShipBullets.forEach(function(bullet, bulletIndex){
 			if((bullet.x >= self.x) && (bullet.x <= self.x + width) && (bullet.y <= (self.y + self.height)) && (bullet.y >= self.y)) {
-				self.hasBeenHit = true;
 				userShipBullets.splice(bulletIndex, 1);
 				badGuys.splice(badGuyIndex, 1);
-				$(document).trigger('badGuyDestroyed', {badGuys});
+				$(document).trigger('badGuyDestroyed', {badGuys: badGuys, destroyedBadGuy: self});
 			}
 		});
 	};
