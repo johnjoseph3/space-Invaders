@@ -1,4 +1,6 @@
 import {Bullet} from './bullet.js';
+import $ from 'jquery';
+
 let direction = 1;
 
 function BadGuy (width, height, color, x, y, gameArea) {
@@ -36,15 +38,14 @@ function BadGuy (width, height, color, x, y, gameArea) {
 	this.fireBullet = function() {
 		this.bullets.push(new Bullet(this, gameArea));
 	};
-	this.destroyIfHitByBullet = function(userShipBullets) {
+	this.destroyIfHitByBullet = function(userShipBullets, badGuys, badGuyIndex) {
 		let self = this;
-		userShipBullets.forEach(function(bullet, index){
+		userShipBullets.forEach(function(bullet, bulletIndex){
 			if((bullet.x >= self.x) && (bullet.x <= self.x + width) && (bullet.y <= (self.y + self.height)) && (bullet.y >= self.y)) {
-				self.speedX = 0;
-				self.height = 0;
-				self.width = 0;
 				self.hasBeenHit = true;
-				userShipBullets.splice(index, 1);
+				userShipBullets.splice(bulletIndex, 1);
+				badGuys.splice(badGuyIndex, 1);
+				$(document).trigger('badGuyDestroyed', {badGuys});
 			}
 		});
 	};

@@ -19,6 +19,11 @@ $(document).on('keyup', function (e) {
 	e.preventDefault();
 	gameArea.key = false;
 });
+
+$(document).on('badGuyDestroyed',function(e, data){
+	badGuys = data.badGuys;
+});
+
 const $playPauseButton = $('.play-pause');
 
 $playPauseButton.on('click', function (e) {

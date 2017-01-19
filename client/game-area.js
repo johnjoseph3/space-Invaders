@@ -18,11 +18,11 @@ const gameArea = {
 		moveUserShip(userShip);
 		updateBullets(userShip);
 		moveBadGuys(badGuys);
-		for(let badGuy of badGuys) {
+		badGuys.forEach(function(badGuy, index) {
 			updateBullets(badGuy);
-			badGuy.destroyIfHitByBullet(userShip.bullets);
+			badGuy.destroyIfHitByBullet(userShip.bullets, badGuys, index);
 			userShip.destroyIfHitByBullet(badGuy.bullets);
-		}
+		});
 	}
 };
 
