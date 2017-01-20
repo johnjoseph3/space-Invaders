@@ -22,12 +22,14 @@ function removeBullet (userShip, index) {
 	userShip.bullets.splice(index, 1);
 }
 
-function updateBullets (ship) {
-	if (ship.bullets.length){
-		ship.bullets.forEach(function(bullet, index){
+function updateBullets (bullets, ship) {
+	if (bullets.length){
+		bullets.forEach(function(bullet, index){
 			moveBullet(bullet);
-			if(bullet.y < 1) {
-				removeBullet(ship, index);
+			if(ship) {
+				if(bullet.y < 1) {
+					removeBullet(ship, index);
+				}
 			}
 		});
 	}

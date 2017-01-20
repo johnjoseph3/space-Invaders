@@ -13,13 +13,15 @@ const gameArea = {
 	clear: function() {
 		this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 	},
-	updateGameArea: function (userShip, badGuys) {
+	updateGameArea: function (userShip, badGuys, destroyedBadGuyBullets) {
 		gameArea.clear();
 		moveUserShip(userShip);
-		updateBullets(userShip);
+		updateBullets(userShip.bullets, userShip);
 		moveBadGuys(badGuys);
+		updateBullets(destroyedBadGuyBullets);
+		userShip.destroyIfHitByBullet(destroyedBadGuyBullets);
 		badGuys.forEach(function(badGuy, index) {
-			updateBullets(badGuy);
+			updateBullets(badGuy.bullets, badGuy);
 			badGuy.destroyIfHitByBullet(userShip.bullets, badGuys, index);
 			userShip.destroyIfHitByBullet(badGuy.bullets);
 		});

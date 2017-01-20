@@ -6,6 +6,7 @@ import {generateBadGuys} from './generate-bad-guys.js';
 import $ from 'jquery';
 let userShip, badGuys, gameUpdateInterval;
 let gameIsRunning = false;
+let destroyedBadGuyBullets = [];
 
 $(document).on('keydown', function (e) {
 	e.preventDefault();
@@ -20,6 +21,9 @@ $(document).on('keyup', function (e) {
 });
 
 $(document).on('badGuyDestroyed',function(e, data){
+	for(let bullet of data.destroyedBadGuy.bullets) {
+		destroyedBadGuyBullets.push(bullet);
+	}
 	clearInterval(data.destroyedBadGuy.fireIntervalId);
 	badGuys = data.badGuys;
 });
@@ -38,7 +42,7 @@ $playPauseButton.on('click', function (e) {
 });
 
 function drawGameArea() {
-	gameArea.init(200, 300);
+	gameArea.init(400, 500);
 	userShip = new UserShip(30, 30, "blue",
 		gameArea.canvas.width/2 - 15,
 		gameArea.canvas.height - 30,
@@ -59,7 +63,9 @@ function startGame() {
 	for(let badGuy of badGuys) {
 		setEnemyFireInterval(badGuy);
 	}
-	gameUpdateInterval = setInterval(function() { gameArea.updateGameArea(userShip, badGuys); }, 20);
+	gameUpdateInterval = setInterval(function() {
+		gameArea.updateGameArea(userShip, badGuys, destroyedBadGuyBullets);
+	}, 20);
 }
 
 function pauseGame() {
