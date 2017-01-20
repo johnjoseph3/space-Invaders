@@ -58,7 +58,7 @@ $playPauseButton.on('click', function (e) {
 
 function drawGameArea() {
 	$('.user-lives').text(userLives);
-	gameArea.init(400, 500);
+	gameArea.init(900, 200);
 	userShip = new UserShip(30, 30,
 		gameArea.canvas.width/2 - 15,
 		gameArea.canvas.height - 30,
@@ -101,10 +101,9 @@ function restartGame() {
 	gameIsRunning = false;
 	$playPauseButton.text('Play');
 	destroyedBadGuyBullets = [];
-	gameArea.clear();
 	drawGameArea();
 	$('.user-lives').text(userLives);
-	setTimeout(() => {drawGameArea();} );
+	setTimeout(() => {gameArea.clear(); drawGameArea();} );
 }
 
 drawGameArea();

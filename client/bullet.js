@@ -2,6 +2,8 @@ let width = 5;
 let height = 5;
 let x = 150;
 let y = 100;
+let userShipBulletSpeed = 5;
+let badGuyBulletSpeed = 1;
 
 function Bullet (ship, gameArea) {
 	this.width = width;
@@ -20,9 +22,9 @@ function Bullet (ship, gameArea) {
 	ctx.fillRect(this.x, this.y, this.width, this.height);
 	this.newPosition = function() {
 		if(ship.type === 'user-ship') {
-			this.y -= 3;
+			this.y -= userShipBulletSpeed;
 		} else {
-			this.y += 1;
+			this.y += badGuyBulletSpeed;
 		}
 	};
 	this.update = function() {
