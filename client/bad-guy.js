@@ -43,9 +43,6 @@ function BadGuy (width, height, x, y, gameArea) {
 				userShipBullets.splice(bulletIndex, 1);
 				badGuys.splice(badGuyIndex, 1);
 				$(document).trigger('badGuyDestroyed', {badGuys: badGuys, destroyedBadGuy: self});
-				if (!badGuys.length) {
-					$(document).trigger('allBadGuysDestroyed');
-				}
 			}
 		});
 	};

@@ -21,21 +21,21 @@ $(document).on('keyup', function (e) {
 });
 
 $(document).on('badGuyDestroyed',function(e, data){
-	for(let bullet of data.destroyedBadGuy.bullets) {
-		destroyedBadGuyBullets.push(bullet);
+	badGuys = data.badGuys;
+	if (badGuys.length) {
+		for(let bullet of data.destroyedBadGuy.bullets) {
+			destroyedBadGuyBullets.push(bullet);
+		}
+	} else {
+		alert('You win!');
+		restartGame();
 	}
 	clearInterval(data.destroyedBadGuy.fireIntervalId);
-	badGuys = data.badGuys;
-});
-
-$(document).on('allBadGuysDestroyed',function(e){
-	restartGame();
-	alert('You win!');
 });
 
 $(document).on('userShipDestroyed',function(e){
-	restartGame();
 	alert('You lose!');
+	restartGame();
 });
 
 const $playPauseButton = $('.play-pause');
@@ -52,7 +52,7 @@ $playPauseButton.on('click', function (e) {
 });
 
 function drawGameArea() {
-	gameArea.init(400, 500);
+	gameArea.init(300, 400);
 	userShip = new UserShip(30, 30,
 		gameArea.canvas.width/2 - 15,
 		gameArea.canvas.height - 30,
@@ -90,11 +90,13 @@ function pauseGame() {
 }
 
 function restartGame() {
-	gameArea.clear();
 	stopIntervals();
 	gameIsRunning = false;
 	$playPauseButton.text('Play');
-	setTimeout(() => {drawGameArea();});
+	destroyedBadGuyBullets = [];
+	gameArea.clear();
+	drawGameArea();
+	setTimeout(() => {drawGameArea();} );
 }
 
 drawGameArea();
