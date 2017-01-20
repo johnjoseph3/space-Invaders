@@ -1,4 +1,6 @@
 import {Bullet} from './bullet.js';
+import $ from 'jquery';
+
 const userShipImage = document.getElementById("user-ship");
 
 function UserShip (width, height, x, y, gameArea) {
@@ -8,6 +10,7 @@ function UserShip (width, height, x, y, gameArea) {
 	this.x = x;
 	this.y = y;
 	this.type = 'user-ship';
+	this.lives = 3;
 	let ctx = gameArea.context;
 	setTimeout(() => {ctx.drawImage(userShipImage, this.x, this.y, this.width, this.height);});
 	this.newPosition = function() {
@@ -36,8 +39,14 @@ function UserShip (width, height, x, y, gameArea) {
 		let self = this;
 		badGuyBullets.forEach(function(bullet, index){
 			if((bullet.x >= self.x) && (bullet.x <= self.x + width) && (bullet.y <= gameArea.canvas.height) && (bullet.y >= (gameArea.canvas.height - self.height))) {
-				console.log('User ship got hit');
 				badGuyBullets.splice(index, 1);
+				if (self.lives > 1) {
+					self.lives--;
+					console.log(self.lives);
+				}
+				else {
+					$(document).trigger('userShipDestroyed');
+				}
 			}
 		});
 	};

@@ -28,6 +28,10 @@ $(document).on('badGuyDestroyed',function(e, data){
 	badGuys = data.badGuys;
 });
 
+$(document).on('userShipDestroyed',function(e){
+	restartGame();
+});
+
 const $playPauseButton = $('.play-pause');
 
 $playPauseButton.on('click', function (e) {
@@ -68,11 +72,23 @@ function startGame() {
 	}, 20);
 }
 
-function pauseGame() {
+function stopIntervals() {
 	for(let badGuy of badGuys) {
 		clearInterval(badGuy.fireIntervalId);
 	}
 	clearInterval(gameUpdateInterval);
+}
+
+function pauseGame() {
+	stopIntervals();
+}
+
+function restartGame() {
+	gameArea.clear();
+	stopIntervals();
+	gameIsRunning = false;
+	$playPauseButton.text('Play');
+	setTimeout(() => {drawGameArea();});
 }
 
 drawGameArea();
