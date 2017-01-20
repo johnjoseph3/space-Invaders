@@ -43,7 +43,7 @@ $playPauseButton.on('click', function (e) {
 
 function drawGameArea() {
 	gameArea.init(400, 500);
-	userShip = new UserShip(30, 30, "blue",
+	userShip = new UserShip(30, 30,
 		gameArea.canvas.width/2 - 15,
 		gameArea.canvas.height - 30,
 		gameArea

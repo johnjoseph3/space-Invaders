@@ -15,11 +15,12 @@ const gameArea = {
 	},
 	updateGameArea: function (userShip, badGuys, destroyedBadGuyBullets) {
 		gameArea.clear();
+
 		moveUserShip(userShip);
+		userShip.destroyIfHitByBullet(destroyedBadGuyBullets);
 		updateBullets(userShip.bullets, userShip);
 		moveBadGuys(badGuys);
 		updateBullets(destroyedBadGuyBullets);
-		userShip.destroyIfHitByBullet(destroyedBadGuyBullets);
 		badGuys.forEach(function(badGuy, index) {
 			updateBullets(badGuy.bullets, badGuy);
 			badGuy.destroyIfHitByBullet(userShip.bullets, badGuys, index);

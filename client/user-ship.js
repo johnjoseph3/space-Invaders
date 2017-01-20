@@ -1,6 +1,7 @@
 import {Bullet} from './bullet.js';
+const userShipImage = document.getElementById("user-ship");
 
-function UserShip (width, height, color, x, y, gameArea) {
+function UserShip (width, height, x, y, gameArea) {
 	this.width = width;
 	this.height = height;
 	this.speedX = 0;
@@ -8,15 +9,13 @@ function UserShip (width, height, color, x, y, gameArea) {
 	this.y = y;
 	this.type = 'user-ship';
 	let ctx = gameArea.context;
-	ctx.fillStyle = color;
-	ctx.fillRect(this.x, this.y, this.width, this.height);
+	setTimeout(() => {ctx.drawImage(userShipImage, this.x, this.y, this.width, this.height);});
 	this.newPosition = function() {
 		this.x += this.speedX;
 	};
 	this.update = function() {
 		let ctx = gameArea.context;
-		ctx.fillStyle = color;
-		ctx.fillRect(this.x, this.y, this.width, this.height);
+		ctx.drawImage(userShipImage, this.x, this.y, this.width, this.height);
 	};
 	this.stopMove = function() {
 		this.speedX = 0;

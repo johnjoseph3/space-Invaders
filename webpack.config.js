@@ -10,7 +10,7 @@ module.exports = {
 	},
 	output: {
 		path: "dist",
-		filename: 'app.bundle.js'
+		filename: 'app.bundle.js',
 	},
 	resolve: {
 		alias: {
@@ -23,7 +23,7 @@ module.exports = {
 			{test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader")},
 			{test: /\.less$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader")},
 			{test: /\.js$/, exclude: /node_modules/, loader: 'babel?presets[]=es2015'},
-			{test: /\.jpe?g$|\.gif$|\.png$|\.svg$|\.woff$|\.ttf$|\.wav$|\.mp3$/, loader: "file"}
+			{test: /\.jpe?g$|\.gif$|\.png$|\.svg$|\.woff$|\.ttf$|\.wav$|\.mp3$/, loader: "file-loader?name=/assets/[name].[ext]"}
 		]
 	},
 	devServer: { inline: true },

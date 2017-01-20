@@ -1,9 +1,10 @@
 import {Bullet} from './bullet.js';
 import $ from 'jquery';
 
+const badGuyImage = document.getElementById("bad-guy");
 let direction = 1;
 
-function BadGuy (width, height, color, x, y, gameArea) {
+function BadGuy (width, height, x, y, gameArea) {
 	this.width = width;
 	this.height = height;
 	this.speedX = 1;
@@ -11,15 +12,13 @@ function BadGuy (width, height, color, x, y, gameArea) {
 	this.y = y;
 	this.type = 'bad-guy';
 	let ctx = gameArea.context;
-	ctx.fillStyle = color;
-	ctx.fillRect(this.x, this.y, this.width, this.height);
+	setTimeout(() => {ctx.drawImage(badGuyImage, this.x, this.y, this.width, this.height);});
 	this.newPosition = function() {
 		this.x += this.speedX;
 	};
 	this.update = function() {
 		let ctx = gameArea.context;
-		ctx.fillStyle = color;
-		ctx.fillRect(this.x, this.y, this.width, this.height);
+		ctx.drawImage(badGuyImage, this.x, this.y, this.width, this.height);
 	};
 	this.stopMove = function() {
 		this.speedX = 0;
