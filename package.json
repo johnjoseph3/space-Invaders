@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start-dev": "webpack-dev-server --content-base dist/ --inline",
+    "start-prod": "PORT=4000 node ./server/app.js"
   },
   "author": "John Joseph",
   "license": "ISC",
@@ -13,6 +14,7 @@
     "babel-loader": "^6.2.10",
     "babel-preset-es2015": "^6.18.0",
     "copy-webpack-plugin": "^4.0.1",
+    "express": "^4.14.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.9.0",
     "jquery": "^3.1.1",
