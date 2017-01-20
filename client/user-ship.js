@@ -3,14 +3,14 @@ import $ from 'jquery';
 
 const userShipImage = document.getElementById("user-ship");
 
-function UserShip (width, height, x, y, gameArea) {
+function UserShip (width, height, x, y, gameArea, userLives) {
 	this.width = width;
 	this.height = height;
 	this.speedX = 0;
 	this.x = x;
 	this.y = y;
 	this.type = 'user-ship';
-	this.lives = 3;
+	this.lives = userLives;
 	let ctx = gameArea.context;
 	setTimeout(() => {ctx.drawImage(userShipImage, this.x, this.y, this.width, this.height);});
 	this.newPosition = function() {
@@ -42,7 +42,7 @@ function UserShip (width, height, x, y, gameArea) {
 				badGuyBullets.splice(index, 1);
 				if (self.lives > 1) {
 					self.lives--;
-					console.log(self.lives);
+					$(document).trigger('userShipHit', {userLives: self.lives});
 				}
 				else {
 					$(document).trigger('userShipDestroyed');

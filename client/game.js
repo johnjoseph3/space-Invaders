@@ -7,6 +7,7 @@ import $ from 'jquery';
 let userShip, badGuys, gameUpdateInterval;
 let gameIsRunning = false;
 let destroyedBadGuyBullets = [];
+let userLives = 3;
 
 $(document).on('keydown', function (e) {
 	e.preventDefault();
@@ -33,6 +34,10 @@ $(document).on('badGuyDestroyed',function(e, data){
 	clearInterval(data.destroyedBadGuy.fireIntervalId);
 });
 
+$(document).on('userShipHit',function(e, data){
+	$('.user-lives').text(data.userLives);
+});
+
 $(document).on('userShipDestroyed',function(e){
 	alert('You lose!');
 	restartGame();
@@ -52,11 +57,13 @@ $playPauseButton.on('click', function (e) {
 });
 
 function drawGameArea() {
-	gameArea.init(300, 400);
+	$('.user-lives').text(userLives);
+	gameArea.init(400, 500);
 	userShip = new UserShip(30, 30,
 		gameArea.canvas.width/2 - 15,
 		gameArea.canvas.height - 30,
-		gameArea
+		gameArea,
+		userLives
 	);
 	badGuys = generateBadGuys(gameArea);
 }
@@ -96,6 +103,7 @@ function restartGame() {
 	destroyedBadGuyBullets = [];
 	gameArea.clear();
 	drawGameArea();
+	$('.user-lives').text(userLives);
 	setTimeout(() => {drawGameArea();} );
 }
 
