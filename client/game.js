@@ -28,8 +28,14 @@ $(document).on('badGuyDestroyed',function(e, data){
 	badGuys = data.badGuys;
 });
 
+$(document).on('allBadGuysDestroyed',function(e){
+	restartGame();
+	alert('You win!');
+});
+
 $(document).on('userShipDestroyed',function(e){
 	restartGame();
+	alert('You lose!');
 });
 
 const $playPauseButton = $('.play-pause');
