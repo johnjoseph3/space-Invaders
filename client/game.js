@@ -10,6 +10,8 @@ let destroyedBadGuyBullets = [];
 const userLives = 3;
 const canvasWidth = $(window).width() * 0.85;
 const canvasHeight = 300;
+let moveLeftTimeoutId;
+let moveRightTimeoutId;
 
 $(document).on('keydown', function (e) {
 	e.preventDefault();
@@ -18,6 +20,26 @@ $(document).on('keydown', function (e) {
 		userShip.fireBullet();
 	}
 });
+
+$('.move-left').on('mousedown', function (e) {
+	moveLeftTimeoutId = setTimeout(function(){gameArea.key = 37;}, 20);
+}).on('mouseup mouseleave', function() {
+	clearTimeout(moveLeftTimeoutId);
+	gameArea.key = null;
+});
+
+$('.move-right').on('mousedown', function (e) {
+	moveRightTimeoutId = setTimeout(function(){gameArea.key = 39;}, 20);
+}).on('mouseup mouseleave', function() {
+	clearTimeout(moveRightTimeoutId);
+	gameArea.key = null;
+});
+
+$('.fire').on('click', function (e) {
+	e.preventDefault();
+	userShip.fireBullet();
+});
+
 $(document).on('keyup', function (e) {
 	e.preventDefault();
 	gameArea.key = false;

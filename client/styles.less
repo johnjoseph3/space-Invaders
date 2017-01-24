@@ -1,4 +1,5 @@
-@button: #f44336;
+@fire-button: #f44336;
+@play-pause-button: #64b5f6;
 
 body {
 	text-align: center;
@@ -13,9 +14,8 @@ button {
 	outline: none;
 	color: white;
 	margin: 0.3em;
-	margin-top: 40px;
+	margin-top: 20px;
 	padding: 0.8em 4em;
-	background-color: @button;
 	text-decoration: none;
 	text-transform: uppercase;
 	border-radius: 3px;
@@ -26,4 +26,14 @@ button {
 	&:hover {
 		box-shadow: 1px 6px 15px rgba(0,0,0,0.5);
 	}
+}
+
+.play-pause {
+	background-color: @play-pause-button;
+}
+
+.fire {
+	display: block;
+	margin: 0 auto;
+	background-color: @fire-button;
 }
