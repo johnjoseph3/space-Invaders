@@ -9,7 +9,7 @@ let gameIsRunning = false;
 let destroyedBadGuyBullets = [];
 const userLives = 3;
 const canvasWidth = $(window).width() * 0.85;
-const canvasHeight = 300;
+let canvasHeight = 300;
 let moveLeftTimeoutId;
 let moveRightTimeoutId;
 
@@ -79,6 +79,12 @@ $playPauseButton.on('click', function (e) {
 	}
 	gameIsRunning =! gameIsRunning;
 });
+
+if ($(window).height() < 400) {
+	canvasHeight = $(window).height() * 0.6;
+	$('button').css('display', 'inline');
+	$('.lives-container').css('display', 'inline');
+}
 
 function drawGameArea() {
 	$('.user-lives').text(userLives);
