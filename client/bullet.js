@@ -4,6 +4,8 @@ let x = 150;
 let y = 100;
 let userShipBulletSpeed = 5;
 let badGuyBulletSpeed = 1;
+const badGuyBulletColor = '#f44336';
+const userBulletColor = '#1a237e';
 
 function Bullet (ship, gameArea) {
 	this.width = width;
@@ -12,10 +14,10 @@ function Bullet (ship, gameArea) {
 	this.x = ship.x + (ship.width/2 - this.width/2);
 	if(ship.type === 'user-ship') {
 		this.y = gameArea.canvas.height - (ship.height + this.height);
-		this.color = 'black';
+		this.color = userBulletColor;
 	} else {
 		this.y = ship.height;
-		this.color = 'red';
+		this.color = badGuyBulletColor;
 	}
 	let ctx = gameArea.context;
 	ctx.fillStyle = this.color;

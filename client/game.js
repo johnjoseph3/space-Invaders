@@ -7,7 +7,9 @@ import $ from 'jquery';
 let userShip, badGuys, gameUpdateInterval;
 let gameIsRunning = false;
 let destroyedBadGuyBullets = [];
-let userLives = 3;
+const userLives = 3;
+const canvasWidth = $(window).width() * 0.85;
+const canvasHeight = 300;
 
 $(document).on('keydown', function (e) {
 	e.preventDefault();
@@ -58,7 +60,7 @@ $playPauseButton.on('click', function (e) {
 
 function drawGameArea() {
 	$('.user-lives').text(userLives);
-	gameArea.init(900, 200);
+	gameArea.init(canvasWidth, canvasHeight);
 	userShip = new UserShip(30, 30,
 		gameArea.canvas.width/2 - 15,
 		gameArea.canvas.height - 30,
