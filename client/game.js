@@ -23,14 +23,14 @@ $(document).on('keydown', function (e) {
 
 $('.move-left').on('mousedown touchstart', function (e) {
 	moveLeftTimeoutId = setTimeout(function(){gameArea.key = 37;}, 20);
-}).on('mouseup mouseleave', function() {
+}).on('mouseup mouseleave touchend', function() {
 	clearTimeout(moveLeftTimeoutId);
 	gameArea.key = null;
 });
 
 $('.move-right').on('mousedown touchstart', function (e) {
 	moveRightTimeoutId = setTimeout(function(){gameArea.key = 39;}, 20);
-}).on('mouseup mouseleave', function() {
+}).on('mouseup mouseleave touchend', function() {
 	clearTimeout(moveRightTimeoutId);
 	gameArea.key = null;
 });
