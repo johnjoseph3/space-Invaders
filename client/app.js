@@ -1,6 +1,7 @@
 /*jshint esversion: 6 */
 
-require('./assets/user-ship.png');
-require('./assets/bad-guy.png');
-require('./styles.less');
-require('./game.js');
+import 'font-awesome-webpack';
+import './assets/user-ship.png';
+import './assets/bad-guy.png';
+import './styles.less';
+import './game.js';
