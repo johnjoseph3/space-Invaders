@@ -6,8 +6,9 @@ let userShipBulletSpeed = 5;
 let badGuyBulletSpeed = 1;
 const badGuyBulletColor = '#f44336';
 const userBulletColor = '#1a237e';
+import {gameArea} from './game-area.js';
 
-function Bullet (ship, gameArea) {
+function Bullet (ship) {
 	this.width = width;
 	this.height = height;
 	this.speedY = 0;

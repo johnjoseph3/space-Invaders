@@ -1,9 +1,10 @@
-import {Bullet} from './bullet.js';
 import $ from 'jquery';
+import {Bullet} from './bullet.js';
+import {gameArea} from './game-area.js';
 
 const userShipImage = document.getElementById("user-ship");
 
-function UserShip (width, height, x, y, gameArea, userLives) {
+function UserShip (width, height, x, y, userLives) {
 	this.width = width;
 	this.height = height;
 	this.speedX = 0;

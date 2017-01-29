@@ -92,10 +92,9 @@ function drawGameArea() {
 	userShip = new UserShip(30, 30,
 		gameArea.canvas.width/2 - 15,
 		gameArea.canvas.height - 30,
-		gameArea,
 		userLives
 	);
-	badGuys = generateBadGuys(gameArea);
+	badGuys = generateBadGuys();
 }
 
 function setEnemyFireInterval(badGuy) {

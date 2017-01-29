@@ -1,10 +1,12 @@
-import {Bullet} from './bullet.js';
 import $ from 'jquery';
+import {Bullet} from './bullet.js';
+import {ExplosionAnimation} from './explosion-animation.js';
+import {gameArea} from './game-area.js';
 
 const badGuyImage = document.getElementById("bad-guy");
 let direction = 1;
 
-function BadGuy (width, height, x, y, gameArea) {
+function BadGuy (width, height, x, y) {
 	this.width = width;
 	this.height = height;
 	this.speedX = 1;
@@ -34,7 +36,7 @@ function BadGuy (width, height, x, y, gameArea) {
 	};
 	this.bullets = [];
 	this.fireBullet = function() {
-		this.bullets.push(new Bullet(this, gameArea));
+		this.bullets.push(new Bullet(this));
 	};
 	this.destroyIfHitByBullet = function(userShipBullets, badGuys, badGuyIndex) {
 		let self = this;
@@ -43,6 +45,7 @@ function BadGuy (width, height, x, y, gameArea) {
 				userShipBullets.splice(bulletIndex, 1);
 				badGuys.splice(badGuyIndex, 1);
 				$(document).trigger('badGuyDestroyed', {badGuys: badGuys, destroyedBadGuy: self});
+				new ExplosionAnimation(self.x, self.y);
 			}
 		});
 	};
