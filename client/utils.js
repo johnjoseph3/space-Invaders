@@ -13,12 +13,12 @@ function moveUserShip (userShip) {
 	userShip.update();
 }
 
-function moveBullet (bullet) {
+function moveBullet(bullet) {
 	bullet.newPosition();
 	bullet.update();
 }
 
-function removeBullet (userShip, index) {
+function removeBullet(userShip, index) {
 	userShip.bullets.splice(index, 1);
 }
 
@@ -35,6 +35,14 @@ function updateBullets (bullets, ship) {
 	}
 }
 
+function updateExplosionAnimations(explosionAnimations) {
+	explosionAnimations.forEach(function(animation, index) {
+		if(animation.updateCyclesCompleted <= animation.numberOfUpdateCyclesBeforeRemoval) {
+			animation.update();
+		}
+	});
+}
+
 function moveBadGuys (badGuys) {
 	badGuys.forEach(function(badGuy, index) {
 		badGuy.changeDirectionsIfAtEdgeOfCanvas(badGuys.length, index);
@@ -43,4 +51,4 @@ function moveBadGuys (badGuys) {
 	});
 }
 
-export {moveUserShip, updateBullets, moveBadGuys};
+export {moveUserShip, updateBullets, moveBadGuys, updateExplosionAnimations};

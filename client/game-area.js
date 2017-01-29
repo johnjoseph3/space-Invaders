@@ -1,6 +1,6 @@
 /*jshint esversion: 6 */
 
-import {moveUserShip, updateBullets, moveBadGuys} from './utils.js';
+import {moveUserShip, updateBullets, moveBadGuys, updateExplosionAnimations} from './utils.js';
 
 const gameArea = {
 	canvas: document.createElement('canvas'),
@@ -13,7 +13,7 @@ const gameArea = {
 	clear: function() {
 		this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 	},
-	updateGameArea: function (userShip, badGuys, destroyedBadGuyBullets) {
+	updateGameArea: function (userShip, badGuys, destroyedBadGuyBullets, explosionAnimations) {
 		gameArea.clear();
 
 		moveUserShip(userShip);
@@ -21,6 +21,7 @@ const gameArea = {
 		updateBullets(userShip.bullets, userShip);
 		moveBadGuys(badGuys);
 		updateBullets(destroyedBadGuyBullets);
+		updateExplosionAnimations(explosionAnimations);
 		badGuys.forEach(function(badGuy, index) {
 			updateBullets(badGuy.bullets, badGuy);
 			badGuy.destroyIfHitByBullet(userShip.bullets, badGuys, index);

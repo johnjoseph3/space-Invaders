@@ -1,6 +1,5 @@
 import $ from 'jquery';
 import {Bullet} from './bullet.js';
-import {ExplosionAnimation} from './explosion-animation.js';
 import {gameArea} from './game-area.js';
 
 const badGuyImage = document.getElementById("bad-guy");
@@ -45,7 +44,6 @@ function BadGuy (width, height, x, y) {
 				userShipBullets.splice(bulletIndex, 1);
 				badGuys.splice(badGuyIndex, 1);
 				$(document).trigger('badGuyDestroyed', {badGuys: badGuys, destroyedBadGuy: self});
-				new ExplosionAnimation(self.x, self.y);
 			}
 		});
 	};

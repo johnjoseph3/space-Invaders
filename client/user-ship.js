@@ -43,7 +43,7 @@ function UserShip (width, height, x, y, userLives) {
 				badGuyBullets.splice(index, 1);
 				if (self.lives > 1) {
 					self.lives--;
-					$(document).trigger('userShipHit', {userLives: self.lives});
+					$(document).trigger('userShipHit', {userShip: self});
 				}
 				else {
 					$(document).trigger('userShipDestroyed');

@@ -3,10 +3,12 @@
 import {UserShip} from './user-ship.js';
 import {gameArea} from './game-area.js';
 import {generateBadGuys} from './generate-bad-guys.js';
+import {ExplosionAnimation} from './explosion-animation.js';
 import $ from 'jquery';
 let userShip, badGuys, gameUpdateInterval;
 let gameIsRunning = false;
 let destroyedBadGuyBullets = [];
+let explosionAnimations = [];
 const userLives = 3;
 const canvasWidth = $(window).width() * 0.85;
 let canvasHeight = 300;
@@ -46,20 +48,24 @@ $(document).on('keyup', function (e) {
 });
 
 $(document).on('badGuyDestroyed',function(e, data){
+	let destroyedBadGuy = data.destroyedBadGuy;
+	explosionAnimations.push(new ExplosionAnimation(destroyedBadGuy));
 	badGuys = data.badGuys;
 	if (badGuys.length) {
-		for(let bullet of data.destroyedBadGuy.bullets) {
+		for(let bullet of destroyedBadGuy.bullets) {
 			destroyedBadGuyBullets.push(bullet);
 		}
 	} else {
 		alert('You win!');
 		restartGame();
 	}
-	clearInterval(data.destroyedBadGuy.fireIntervalId);
+	clearInterval(destroyedBadGuy.fireIntervalId);
 });
 
 $(document).on('userShipHit',function(e, data){
-	$('.user-lives').text(data.userLives);
+	let userShip = data.userShip;
+	explosionAnimations.push(new ExplosionAnimation(userShip));
+	$('.user-lives').text(userShip.lives);
 });
 
 $(document).on('userShipDestroyed',function(e){
@@ -110,7 +116,7 @@ function startGame() {
 		setEnemyFireInterval(badGuy);
 	}
 	gameUpdateInterval = setInterval(function() {
-		gameArea.updateGameArea(userShip, badGuys, destroyedBadGuyBullets);
+		gameArea.updateGameArea(userShip, badGuys, destroyedBadGuyBullets, explosionAnimations);
 	}, 20);
 }
 
