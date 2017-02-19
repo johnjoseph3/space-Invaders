@@ -42,6 +42,11 @@ $('.fire').on('click touchstart', function (e) {
 	userShip.fireBullet();
 });
 
+$('.restart').on('click', function (e) {
+	e.preventDefault();
+	restartGame();
+});
+
 $(document).on('keyup', function (e) {
 	e.preventDefault();
 	gameArea.key = false;
@@ -56,8 +61,9 @@ $(document).on('badGuyDestroyed',function(e, data){
 			destroyedBadGuyBullets.push(bullet);
 		}
 	} else {
-		alert('You win!');
-		restartGame();
+		pauseGame();
+		$('#winLoseMessage').text("You Win!");
+		$('#modal').modal('open');
 	}
 	clearInterval(destroyedBadGuy.fireIntervalId);
 });
@@ -69,8 +75,9 @@ $(document).on('userShipHit',function(e, data){
 });
 
 $(document).on('userShipDestroyed',function(e){
-	alert('You lose!');
-	restartGame();
+	pauseGame();
+	$('#winLoseMessage').text("Sorry, you lost. Try again!");
+	$('#modal').modal('open');
 });
 
 const $playPauseButton = $('.play-pause');
