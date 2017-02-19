@@ -15,6 +15,10 @@ let canvasHeight = 300;
 let moveLeftTimeoutId;
 let moveRightTimeoutId;
 
+// $(document).ready(function(){
+// 	$('.modal').modal();
+// });
+
 $(document).on('keydown', function (e) {
 	e.preventDefault();
 	gameArea.key = e.keyCode;

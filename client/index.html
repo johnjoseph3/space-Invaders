@@ -6,15 +6,13 @@
 		<title>Space Invaders</title>
 		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-
-		<script src="vendor.bundle.js"></script>
 	</head>
 	<body>
 		<div class="game-container"></div>
-		<button class="move-left"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
-		<button class="move-right"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
-		<button class="fire">Fire</button>
-		<button class="play-pause">Play</button>
+		<button class="btn move-left"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+		<button class="btn move-right"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+		<button class="btn fire">Fire</button>
+		<button class="btn play-pause">Play</button>
 		<div class="lives-container">
 			<span>Lives:</span>
 			<span class="user-lives"></span>
@@ -23,6 +21,17 @@
 			<img id="user-ship" src="/assets/user-ship.png"}>
 			<img id="bad-guy" src="/assets/bad-guy.png">
 		</div>
+		<a class="waves-effect waves-light btn" href="#modal1">Modal</a>
+
+		<div id="modal1" class="modal">
+			<div class="modal-content">
+				<h4>You Won!</h4>
+			</div>
+			<div class="modal-footer">
+				<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Restart</a>
+			</div>
+		</div>
+
 		<script src="app.bundle.js"></script>
 	</body>
 </html>
