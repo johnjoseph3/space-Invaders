@@ -4,8 +4,8 @@ let x = 150;
 let y = 100;
 let userShipBulletSpeed = 5;
 let badGuyBulletSpeed = 1;
-const badGuyBulletColor = 'orange';
-const userBulletColor = 'blue';
+const badGuyBulletColor = '#A239CA';
+const userBulletColor = '#4717F6';
 import {gameArea} from './game-area.js';
 
 function Bullet (ship) {
